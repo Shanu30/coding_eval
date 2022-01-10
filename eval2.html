@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive DOM</title>
+    <style>
+        form {
+            border: 1px solid black;
+            width: 380px;
+            height: 300px;
+            padding: 20px;
+        }
+        #course {
+            display: block;
+            height: 50px;
+            width: 300px;
+            font-size: 25px;
+        }
+        #details {
+            display: block;
+            height: 50px;
+            width: 300px;
+            font-size: 25px;
+            margin-top: 5px;
+        }
+        #submit{
+            display: block;
+            width: 350px;
+            height: 60px;
+            font-size: 30px;
+            margin-top: 20px;
+        }
+        main {
+            width: 1350px;
+            margin: 50px auto;
+            display: grid;
+            row-gap: 30px;
+            column-gap: 10px;
+            grid-template-columns: 450px 450px 450px;
+            grid-template-rows: 350px 350px 350px;
+        }
+        .sec {
+            width: 380px;
+            height: 300px;
+            border: 5px solid black;
+            padding: 20px;
+        }
+        .course{
+            font-size: 40px;
+            text-align: center;
+        }
+        .detail{
+            font-size: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .flex{
+            display: flex;
+            flex-direction: row;
+            width: 80%;
+            gap:29%;
+            margin: 150px auto 0px auto;
+        }
+        .btn{
+            border: 2px solid black;
+            border-radius: 5px;
+            width: 35%;
+            height: 30px;
+            text-align: center;
+            font-size: 25px;
+            
+        }
+        @media only screen and (max-width:500px) {
+            main {
+                grid-template-columns: 450px;
+                grid-template-rows: 350px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <form>
+        <input id="course" type="text" placeholder="Course"/>
+    </br>
+    </br>
+        <input id="details" type="text" placeholder="Course details"/>
+    </br>
+    </br>
+        <input id="submit" type="submit" value="ADD"/>
+    </form>
+
+    <main></main>
+
+
+
+
+    <script>
+        document.querySelector("form").addEventListener("submit", clickSubmit);
+
+        function clickSubmit(event) {
+            event.preventDefault();
+            var course = document.getElementById("course").value;
+            var details = document.getElementById("details").value;
+            
+            var sec = document.createElement("div");
+            sec.className = "sec";
+        
+            var div1 = document.createElement("div");
+            div1.textContent = course;
+            div1.className = "course";
+
+            var div2 = document.createElement("div");
+            div2.innerHTML = details;
+            div2.className = "detail";
+
+            var flex = document.createElement("div");
+            flex.className = "flex";
+            var btn1 = document.createElement("div");
+            btn1.textContent = "DETAILS";
+            btn1.className = "btn";
+            var btn2 = document.createElement("div");
+            btn2.textContent = "APPLY";
+            btn2.className = "btn";
+
+            flex.append(btn1, btn2);
+            sec.append(div1, div2, flex)
+            document.querySelector("main").append(sec);
+        }
+    </script>
+
+
+</body>
+</html>
