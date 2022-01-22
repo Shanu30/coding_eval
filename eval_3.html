@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>evaluation 3</title>
+</head>
+<body>
+    <form>
+        <input type="text" name="task" placeholder="Enter Activity"/>
+        <input type="checkbox" name="check"/>
+        <input type="submit" value="ADD"/>
+    </form>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>TASK</th>
+                <th>STATUS</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        document.querySelector("form").addEventListener("submit", append);
+        var table = document.querySelector("table");
+        var tbody = document.querySelector("tbody");
+        var a = [];
+        function append(e) {
+            e.preventDefault();
+            tbody.innerHTML = null;
+            var task = e.target.task.value;
+            var check = e.target.check.checked;
+            var data = {
+                task: task,
+                status: check
+            }
+            data = JSON.stringify(data);
+            localStorage.setItem('Tasks', data);
+            var storedData = localStorage.getItem('Tasks');
+            storedData = JSON.parse(storedData);
+            a.push(storedData);
+
+
+
+            for(let i=0; i<a.length; i++) {
+                var tr = document.createElement("tr");
+                var addtask = document.createElement("td");
+                var addstatus = document.createElement("td");
+                addtask.innerText = a[i].task;
+                if(a[i].status===true) {
+                    addstatus.innerText = "Completed"
+                }
+                else {
+                    addstatus.innerText = "Pending"
+                }
+                tr.append(addtask, addstatus);
+                tbody.append(tr);
+            }
+            table.append(tbody);
+           
+        }
+        
+        
+    </script>
+</body>
+</html>
